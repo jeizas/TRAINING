@@ -1,0 +1,42 @@
+/* 居中 */
+body{
+	margin:0;
+	padding:0;
+	font-size:14px;
+}
+/* 全局样式 */
+.content_Bg{
+	margin:0 auto;
+	width:90%;
+}
+.content_top{
+	background-color:#23F;
+	width:100%;
+	height:100px;
+	font-size:30;
+	text-align:center;
+	line-height:100px;
+}
+.content_left{
+	width:25%;
+	height:580;
+	/* border:#23F solid 1px; */
+	float:left;
+	background-color:#aff;
+}
+.content_right{
+	width:74%;
+	/* border:#23F solid 1px; */
+	float:right;
+}
+.content_bottom{
+	height:20px;
+	background-color:#1ddacd;
+}
+.loginMeg{
+	width:100px;
+	height:50px;
+	float:right;
+	margin-top:50px;
+	background-color:red;
+}

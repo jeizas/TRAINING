@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>   
+
+	<!-- 指定Web应用的默认编码，相当于调用request的setCharacterEncoding方法 -->
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<!-- 设置浏览器是否缓存静态内容，默认值为true(生产环境下使用)，开发阶段最好关闭 -->
+	<constant name="struts.serve.static.browserCache" value="false" />
+	<!-- 当Struts2的配置文件修改后，系统是否自动重新加载配置文件，默认值为false(生产环境下使用)，开发阶段最好打开 -->
+	<constant name="struts.configuration.xml.reload" value="true" />
+	<!-- 开发模式下使用，这样可以打印出更详细的日志信息 -->
+	<constant name="struts.devMode" value="false" />
+	<!-- 默认的视图主题 -->
+	<constant name="struts.ui.theme" value="simple" />
+	<!-- 把Action对象交给Spring创建和管理 -->
+	<constant name="struts.objectFactory" value="spring" />
+	<!-- Struts2处理的请求后缀,默认值是action -->
+	<constant name="struts.action.extension" value="do" />
+	   
+    <package name="default" extends="struts-default" namespace="/">  
+    	<!-- 登录拦截 -->
+    	<interceptors>
+			<interceptor name="LoginInterceptor" class="com.jeizas.Interceptor.LoginInterceptor"></interceptor>
+			<interceptor-stack name="mydefault">
+				<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="LoginInterceptor" />
+			</interceptor-stack>
+		</interceptors>
+		<!-- 错误引导 -->
+    	<default-action-ref name="indexPage" />		
+		<global-results>
+			<result name="exceptionPage">/WEB-INF/pages/error.jsp</result>
+		</global-results>		
+		<global-exception-mappings>
+			<exception-mapping result="exceptionPage" exception="java.lang.Exception" />
+		</global-exception-mappings>		
+		<action name="indexPage">
+			<result>/index.jsp</result>
+		</action>
+		<!-- 自定义的"登录"action -->
+		<action name="login" class="com.jeizas.action.LoginUserAction" method="login">
+			<result name="success">/WEB-INF/pages/threeMan/home.jsp</result>
+			<result name="error">/index.jsp</result>
+		</action>
+		<action name="logout" class="com.jeizas.action.LoginUserAction" method="logout">
+			<result name="success">/index.jsp</result>
+		</action>
+		<!-- 修改三类人员的信息 -->
+		<action name="editThreeMan" class="com.jeizas.action.ThreeManAction" method="edit">
+			<result name="success">/WEB-INF/pages/threeMan/home.jsp</result>
+		</action>
+		<!-- 测试 -->
+		<action name="test" class="com.jeizas.action.ThreeManAction" method="testInterceptor">
+			<result name="success">/WEB-INF/pages/test.jsp</result>
+		</action>
+	</package>
+	<!-- ajax -->
+	<package namespace="/ajax" extends="json-default" name="ajax">
+		<action name="*Ajax*" method="{2}" class="com.jeizas.action.{1}"></action>
+	</package>
+</struts>    
