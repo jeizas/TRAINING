@@ -57,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
 	</div>
 	<div id="dd" class="easyui-draggable easyui-resizable" data-options="handle:&#39;#mytitle&#39;" style="width:846px; height: 700px; border: 1px solid rgb(204, 204, 204); position: absolute; left: 300px; top: 196px; background-color: rgb(245, 246, 248);">
-		<div id="mytitle" style="padding: 5px; background: rgb(221, 221, 221);">欢迎三类人员登录</div>
+		<div id="mytitle" style="padding: 5px; background: rgb(221, 221, 221);">欢迎监管人员登录</div>
 		<div style="padding:20px;">
 			<div id="tag_cont0" class="content_right" style="height:600px; width:100%; border:none;">
         		 首页内容

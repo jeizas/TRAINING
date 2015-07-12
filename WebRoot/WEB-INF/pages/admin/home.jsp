@@ -1,10 +1,10 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -19,7 +19,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="css/demo.css">
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
-
+	
+	<!-- import semantic-ui -->
+  	<link rel="stylesheet" href="js/semantic-ui/semantic.min.css" />
+  	<script src="js/semantic-ui/semantic.min.js"></script>
 </head>
   
 <body>
@@ -49,28 +52,73 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div style="padding:20px">
         	<ul id="nav_tags">
         		<li class="on" onClick="select_tag(this,'tag_cont0')">首页</li>
-            	<li onClick="select_tag(this,'tag_cont4')">网上报名</li>
-            	<li onClick="select_tag(this,'tag_cont1')">修改信息</li>
-            	<li onClick="select_tag(this,'tag_cont2')">查看进度</li>
-            	<li onClick="select_tag(this,'tag_cont3')">注销账号</li>
+            	<li onClick="select_tag(this,'tag_cont4')">培训教师管理</li>
+            	<li onClick="select_tag(this,'tag_cont1')">三类人员管理</li>
+            	<li onClick="select_tag(this,'tag_cont2')">企业副总管理</li>
+            	<li onClick="select_tag(this,'tag_cont3')">监管人员管理</li>
             </ul>
         </div>
 	</div>
-	<div id="dd" class="easyui-draggable easyui-resizable" data-options="handle:&#39;#mytitle&#39;" style="width:846px; height: 700px; border: 1px solid rgb(204, 204, 204); position: absolute; left: 300px; top: 196px; background-color: rgb(245, 246, 248);">
-		<div id="mytitle" style="padding: 5px; background: rgb(221, 221, 221);">欢迎三类人员登录</div>
+	<div id="dd" class="easyui-draggable easyui-resizable" data-options="handle:&#39;#mytitle&#39;" style="width:1047px; height: 700px; border: 1px solid rgb(204, 204, 204); position: absolute; left: 300px; top: 196px; background-color: rgb(245, 246, 248);">
+		<div id="mytitle" style="padding: 5px; background: rgb(221, 221, 221);">欢迎系统管理员登录</div>
 		<div style="padding:20px;">
 			<div id="tag_cont0" class="content_right" style="height:600px; width:100%; border:none;">
         		 首页内容
         	</div>
         	<div id="tag_cont4" class="content_right" style="height:600px; width:100%; border:none;">   
         		网上报名    
-        		<button id="testAjax">测试ajax</button>		 
         	</div>
             <div id="tag_cont1" class="content_right" style="height:600px; width:100%; border:none; display:none;">
-        		<!-- <span>------当前位置:修改信息--欢迎登录------</span> -->
-        		<span style="float:right;color:red;" >${message }</span>
-        		<!-- 点击修改人员信息 -->
-                <form action="editThreeMan.do" name="modifyForm" method="post">
+            	<div>
+            		<div style="border: 1px solid #dadada;margin-bottom:5px;"> 
+		  				<div class="tiny ui button" style="background:white;border:1px solid #66B8D7;" onclick="search(1)">
+							<i class="search icon"></i>
+							查询
+						</div>
+						<div class="tiny ui button" style="background:white;border:1px solid #66B8D7;" id="add_equipment" onclick="addEquipment()">
+	           				<i class="add icon"></i>
+	            			添加
+	        			</div>
+						<div class="tiny ui button" style="background:white;border:1px solid #66B8D7;" onclick="delEquipment()">
+							<i class="remove icon"></i>
+							删除
+						</div>
+	        			<div class="tiny ui button" style="background:white;border:1px solid #66B8D7;" onclick="exportExcl()">
+	            			<i class="table icon"></i>
+	            			导出excl                    
+	        			</div>
+        			</div>
+            		<table class="table ui">
+            			<thead>
+            				<tr>
+            					<td><input type="checkbox"></td>
+            					<td>姓名</td> <td>性别</td> <td>职务</td> <td>职称</td> <td>学位</td> <td>类型</td> <td>公司</td> <td>身份证</td> <td>发证日期</td> <td>有效期起</td> <td>有效期讫</td> <td>发证机关</td> <td>证书号</td>
+            				</tr>
+            			</thead>
+            			<tbody>
+            				<c:forEach items="${threeManList }" var="t">
+            					<tr>
+            						<td><input type="checkbox" name="threeManCheck" id="${t.id }"></td>
+            						<td>${t.name }</td>
+            						<td>${t.indefication }</td>
+            						<td>${t.sex }</td>
+            						<td>${t.duty }</td>
+            						<td>${t.title }</td>
+            						<td>${t.degress }</td>
+            						<td>${t.type }</td>
+            						<td>${t.companyid }</td>
+            						<td>${t.issus_date }</td>
+            						<td>${t.start_date }</td>
+            						<td>${t.final_date }</td>
+            						<td>${t.authority }</td>
+            						<td>${t.certificate }</td>
+            					</tr>
+            				</c:forEach>
+            			</tbody>
+            		</table>
+            	</div>
+        		<div style="display:none;">
+        			<form action="editThreeMan.do" name="modifyForm" method="post">
                 		<div class="label_name" style="padding-top:10px;">
 			 	 			<div style=" float:left; padding-right:100px;">
 								<label>姓名</label>
@@ -151,11 +199,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<i class="send icon"></i>
 							取消
 						</div>
-
-
-                </form>
-
-        		      	
+            		</form>	  
+            	</div>    	
         	</div>
             <div id="tag_cont2" class="content_right" style="height:600px; width:100%; border:none; display:none;">
         		<!-- <span>------当前位置:查看进度--欢迎登录------</span> -->
@@ -173,14 +218,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             
        	</div>
 	</div>
-	<div id="dd" class="easyui-draggable easyui-resizable" data-options="handle:&#39;#mytitle&#39;" style="width: 198px; height: 530px; border: 1px solid rgb(204, 204, 204); position: absolute; left:1148px; top: 366px; background-color: rgb(245, 246, 248);">
-		<div id="mytitle" style="padding: 5px; background: rgb(221, 221, 221);">广告招租</div>
-		<div style="padding:20px;">
-        	<span>大连中软巨坑，深不见底，卖货上京东，取货更轻松</span>
-       	</div>
-	</div>
-
-
 </div>
 
 <!--=========================footer================================-->

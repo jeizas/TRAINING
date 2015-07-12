@@ -28,42 +28,67 @@ public class LoginUserAction {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpSession session = request.getSession();
 		System.out.println(flag);
+		if(t_name.equals(null) || t_cerid.equals(null) || t_name == "" || t_cerid == ""){//若为空，则直接返回
+			System.out.println("===1===");
+			request.setAttribute("error", "用户名和证件号码不能为空！");
+			request.setAttribute("error", "姓名和证件号码不匹配!");//用户名和密码跟数据库的不匹						
+			request.setAttribute("curTag","tag_cont0");
+			return "error";
+		}
 		switch(flag){
-			case "1":
+			case "0":
+				System.out.println("threeMan login... ...");
 				List<ThreeMan> list = threeManService.getThreeManList();
 				for(ThreeMan t:list){
-					System.out.println(t);
-				}
-				if(t_name.equals(null) || t_cerid.equals(null) || t_name == "" || t_cerid == ""){//若为空，则直接返回
-					System.out.println("======");
-					request.setAttribute("error", "用户名和证件号码不能为空！");
+					if(t.getName().equals(t_name) && t.getCertificate().equals(t_cerid)){
+							session.setAttribute("loginUser", t);//登录成功
+					}else{
+						request.setAttribute("error0", "姓名和证件号码不匹配!");//用户名和密码跟数据库的不匹						
+						request.setAttribute("curTag","tag_cont0");
+						return "error";
+					}
+			}
+			return "0";
+			case "1":
+				System.out.println("培训教师登录");
+				if(flag != ""){
+					System.out.println("===1===");
+					request.setAttribute("error1", "姓名和证件号码不匹配!");//用户名和密码跟数据库的不匹						
+					request.setAttribute("curTag","tag_cont1");
 					return "error";
 				}else{
-					System.out.println("222222222");
-					for(ThreeMan t:list){
-							if(t.getName().equals(t_name) && t.getCertificate().equals(t_cerid)){
-								System.out.println("+++++++");
-								session.setAttribute("loginUser", t);//登录成功
-						}else{
-							System.out.println("------");
-							request.setAttribute("error", "姓名和证件号码不匹配!");//用户名和密码跟数据库的不匹配
-							return "error";
-						}
-					}
+					return "1";
 				}
-				return "success";
 			case "2":
-				System.out.println("培训教师登录");
-				return "success";
-			case "3":
 				System.out.println("企业副总登录");
-				return "success";
-			case "4":
+				if(t_name != null){//若为空，则直接返回
+					System.out.println("===2===");
+					request.setAttribute("error2", "姓名和证件号码不匹配!");//用户名和密码跟数据库的不匹						
+					request.setAttribute("curTag","tag_cont2");
+					return "error";
+				}else{
+					return "2";
+				}
+			case "3":
 				System.out.println("监管人员登录");
-				return "success";
-			case "5":
+				if(t_name != null){//若为空，则直接返回
+					System.out.println("===3===");
+					request.setAttribute("error3", "姓名和证件号码不匹配!");//用户名和密码跟数据库的不匹						
+					request.setAttribute("curTag","tag_cont3");
+					return "error";
+				}else{
+					return "3";
+				}
+			case "4":
 				System.out.println("系统管理员登录");
-				return "success";
+				if(t_name == null){//若为空，则直接返回
+					System.out.println("===4===");
+					request.setAttribute("error4", "姓名和证件号码不匹配!");//用户名和密码跟数据库的不匹						
+					request.setAttribute("curTag","tag_cont4");
+					return "error";
+				}else{
+					return "4";
+				}
 		}
 		return "error";
 			

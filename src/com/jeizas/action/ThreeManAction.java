@@ -2,7 +2,6 @@ package com.jeizas.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,16 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
-import net.sf.json.processors.JsonValueProcessor;
 
 import org.apache.struts2.ServletActionContext;
-import org.omg.CORBA.PRIVATE_MEMBER;
 import org.springframework.stereotype.Controller;
 
-import com.google.gson.JsonObject;
 import com.jeizas.entity.ThreeMan;
 import com.jeizas.service.ThreeManService;
 import com.opensymphony.xwork2.ActionSupport;

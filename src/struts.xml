@@ -39,7 +39,11 @@
 		</action>
 		<!-- 自定义的"登录"action -->
 		<action name="login" class="com.jeizas.action.LoginUserAction" method="login">
-			<result name="success">/WEB-INF/pages/threeMan/home.jsp</result>
+			<result name="0">/WEB-INF/pages/threeMan/home.jsp</result>
+			<result name="1">/WEB-INF/pages/teacher/home.jsp</result>
+			<result name="2">/WEB-INF/pages/regulators/home.jsp</result>
+			<result name="3">/WEB-INF/pages/president/home.jsp</result>
+			<result name="4" type="redirect">admin/gotoHome.do</result>
 			<result name="error">/index.jsp</result>
 		</action>
 		<action name="logout" class="com.jeizas.action.LoginUserAction" method="logout">

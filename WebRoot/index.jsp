@@ -30,14 +30,20 @@ body{
 }
 </style>
 <script type="text/javascript">
-	function loginCheck(){
-		var t_name = document.getElementById("t_name").value;
-		var t_certificate = document.getElementById("t_certificate").value;
+	function loginCheck(i){
+		var t_name = $("#t_name"+i+"").val();
+		var t_certificate = $("#t_cerid"+i+"").val();
+		/* var t_name = document.getElementById(""+name+"").value;
+		var t_certificate = document.getElementById(""+id+"").value; */
 		if(t_name == "" || t_certificate == ""){
 			alert("用户名和密码不能为空！");
 			return false;
 		}else{
-			document.loginForm.submit();
+			if(i == 0) document.loginForm0.submit();
+			if(i == 1) document.loginForm1.submit();
+			if(i == 2) document.loginForm2.submit();
+			if(i == 3) document.loginForm3.submit();
+			if(i == 4) document.loginForm4.submit();
 		}
 	}
 	function select_tag(click_obj,show_cont){
@@ -74,79 +80,93 @@ body{
     	<div class="login">
         	<div class="login_title">
             	<span style="margin:0 auto;position:absolute">登录</span>
-            	<span id="errMeg" style="color:red;font-size:10px;float:right;margin-right:20px;">${error }</span>
             </div>
         	<ul id="login_tags">
-            	<li class="on" onClick="select_tag(this,'tag_cont0')">三类人员</li>
-            	<li onClick="select_tag(this,'tag_cont1')">培训教师</li>
-            	<li onClick="select_tag(this,'tag_cont2')">企业副总</li>
-            	<li onClick="select_tag(this,'tag_cont3')">监管人员</li>
-            	<li onClick="select_tag(this,'tag_cont4')">系统管理员</li>
+            	<li id="tag_cont0cla" class="on" onClick="select_tag(this,'tag_cont0')">三类人员</li>
+            	<li id="tag_cont1cla" onClick="select_tag(this,'tag_cont1')">培训教师</li>
+            	<li id="tag_cont2cla" onClick="select_tag(this,'tag_cont2')">企业副总</li>
+            	<li id="tag_cont3cla" onClick="select_tag(this,'tag_cont3')">监管人员</li>
+            	<li id="tag_cont4cla" onClick="select_tag(this,'tag_cont4')">系统管理员</li>
             </ul>
+            <!-- threeMan login -->
             <div id="tag_cont0">
-            	<form method="post" id="login_form" action="login.do" name="loginForm" >
+            	<form method="post" action="login.do" name="loginForm0" >
                 	<div class="id_1">
                     	<span>姓名</span>
-                    	<input type="hidden" name="flag" value="1" >
-                        <input name="t_name" class="name_sanlei" type="text" id="t_name" value="输入姓名" onFocus="if(this.value=='输入姓名')this.value=''" onBlur="if(this.value=='') this.value='请输入姓名'">
+                    	<input type="hidden" name="flag" value="0" >
+                        <input name="t_name" id="t_name0" class="name_sanlei" type="text" value="输入姓名" onFocus="if(this.value=='输入姓名')this.value=''" onBlur="if(this.value=='') this.value='请输入姓名'">
                     </div>
                 	<div class="psd_1">
                     	<span>安全许可证</span>
-                        <input name="t_cerid" class="psd_sanlei" id="t_certificate" type="password" value="" >
-                    </div>
-                    <input type="button" value="点击登录" class="button1" onclick="loginCheck()">
+                        <input name="t_cerid" id="t_cerid0" class="psd_sanlei" type="password" value="" >
+                        <span  style="color:red;font-size:10px;float:right;">${error0 }</span>
+                    </div> 
+                    <input type="button" value="点击登录" class="button1" onclick="loginCheck(0)">
                 </form>
             </div>
+            <!-- teacher login -->
             <div id="tag_cont1">
-            	<form method="post" id="login_form" action="">
+            	<form method="post"action="login.do" name="loginForm1">
                 	<div class="id_2">
                     	<span>教师编号:</span>
-                        <input class="name_sanlei" type="text" value="请输入姓名" onFocus="if(this.value=='请输入姓名')this.value=''" onBlur="if(this.value=='') this.value='请输入姓名'">
+                    	<input type="hidden" name="flag" value="1" >
+                        <input name="t_name" id="t_name1" class="name_sanlei" type="text" value="请输入姓名" onFocus="if(this.value=='请输入姓名')this.value=''" onBlur="if(this.value=='') this.value='请输入姓名'">
                     </div>
                 	<div class="psd_2">
                     	<span>密码:</span>&nbsp;&nbsp;
-                        <input class="psd_sanlei" type="password" value="">
+                        <input name="t_cerid" id="t_cerid1" class="psd_sanlei" type="password" value="">
+                        <span  style="color:red;font-size:10px;float:right;">${error1 }</span>
                     </div>
-                    <input type="submit" value="点击登录" class="button1">
+                    
+                    <input type="button" value="点击登录" class="button1" onclick="loginCheck(1)">
                 </form>
             </div>
+            <!-- president login -->
             <div id="tag_cont2">
-            	<form method="post" id="login_form" action="">
+            	<form method="post"  action="login.do" name="loginForm2">
                 	<div class="id_3">
-                    	<span>超级账号:</span>&nbsp;
-                        <input class="name_sanlei" type="text" value="请输入姓名" onFocus="if(this.value=='请输入姓名')this.value=''" onBlur="if(this.value=='') this.value='请输入姓名'">
+                    	<span>超级账号:</span>
+                    	<input type="hidden" name="flag" value="2" >
+                        <input name="t_name"id="t_name2" class="name_sanlei" type="text" value="请输入姓名" onFocus="if(this.value=='请输入姓名')this.value=''" onBlur="if(this.value=='') this.value='请输入姓名'">
                     </div>
                 	<div class="psd_3">
                     	<span>超级密码:</span>
-                        <input class="psd_sanlei" type="password" value="">
+                        <input name="t_cerid" id="t_cerid2" class="psd_sanlei" type="password" value="">
+                        <span  style="color:red;font-size:10px;float:right;">${error2 }</span>
                     </div>
-                    <input type="submit" value="点击登录" class="button1">
+                    <input type="button" value="点击登录" class="button1" onclick="loginCheck(2)">
                 </form>
             </div>
+            <!-- regulators login -->
             <div id="tag_cont3">
-            	<form method="post" id="login_form" action="">
+            	<form method="post"  action="login.do" name="loginForm3">
                 	<div class="id_4">
                     	<span>监管用户:</span>
-                        <input class="name_sanlei" type="text" value="请输入姓名" onFocus="if(this.value=='请输入姓名')this.value=''" onBlur="if(this.value=='') this.value='请输入姓名'">
+                    	<input type="hidden" name="flag" value="3" >
+                        <input name="t_name" name="t_name3" class="name_sanlei" type="text" value="请输入姓名" onFocus="if(this.value=='请输入姓名')this.value=''" onBlur="if(this.value=='') this.value='请输入姓名'">
                     </div>
                 	<div class="psd_4">
                     	<span>密码:</span>&nbsp;&nbsp;
-                        <input class="psd_sanlei" type="password" value="" >
+                        <input name="t_cerid" id="t_cerid3" class="psd_sanlei" type="password" value="" >
+                        <span  style="color:red;font-size:10px;float:right;">${error3 }</span>
                     </div>
-                    <input type="submit" value="点击登录" class="button1">
+                    <input type="button" value="点击登录" class="button1" onclick="loginCheck(3)">
                 </form>
             </div>
+            <!-- admin login -->
             <div id="tag_cont4">
-            	<form method="post" id="login_form" action="">
+            	<form method="post"  action="login.do" name="loginForm4">
                 	<div class="id_5">
                     	<span>管理账号:</span>
-                        <input class="name_sanlei" type="text" value="请输入姓名" onFocus="if(this.value=='请输入姓名')this.value=''" onBlur="if(this.value=='') this.value='请输入姓名'">
+                        <input name="t_name" name="t_name4" class="name_sanlei" type="text" value="请输入管理员账号" onFocus="if(this.value=='请输入管理员账号')this.value=''" onBlur="if(this.value=='') this.value='请输入管理员账号'">
+                   		<input type="hidden" name="flag" value="4" >
                     </div>
                 	<div class="psd_5">
                     	<span>密码:</span>&nbsp;&nbsp;
-                        <input class="psd_sanlei" type="password" value="" >
+                        <input name="t_cerid" id="t_cerid4" class="psd_sanlei" type="password" value="" >
+                        <span  style="color:red;font-size:10px;float:right;">${error4 }</span>
                     </div>
-                    <input type="submit" value="点击登录" class="button1">
+                    <input type="button" value="点击登录" class="button1" onclick="loginCheck(4)">
                 </form>
             </div>
         </div>
@@ -166,4 +186,16 @@ body{
     </div>
 </footer>
 </body>
+<script>
+	if("${curTag}"){
+		var d = document.getElementById("${curTag}cla");
+		select_tag(d,"${curTag}");
+	}
+/* 	if(${curTag} != "" || ${curTag} != null){
+		for(var i=0;i<5;i++){
+			document.getElementById('tag_cont'+i).style.display="none";
+		}
+		document.getElementById('tag_cont2').style.display="block";
+	} */
+</script>
 </html>
