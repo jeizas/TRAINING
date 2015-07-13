@@ -14,18 +14,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<link type="text/css" rel="stylesheet" href="css/reset.css" media="all">
 	<link type="text/css" rel="stylesheet" href="css/main.css" media="all">
-	<link rel="stylesheet" type="text/css" href="css/easyui.css">
-	<link rel="stylesheet" type="text/css" href="css/icon.css">
-	<link rel="stylesheet" type="text/css" href="css/demo.css">
-	<script type="text/javascript" src="js/jquery.min.js"></script>
-	<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
 	
-	<!-- import semantic-ui -->
-  	<link rel="stylesheet" href="js/semantic-ui/semantic.min.css" />
-  	<script src="js/semantic-ui/semantic.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="js/easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="js/easyui/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="js/easyui/demo.css">
+	<script type="text/javascript" src="js/easyui/jquery.min.js"></script>
+	<script type="text/javascript" src="js/easyui/jquery.easyui.min.js"></script>
+	
+<style type="text/css">
+	body{margin:0px;padding:0px;}
+	#dlg form input{
+		width
+	}
+</style>
 </head>
   
-<body>
+<body id="page_01">
 <header>
 	<h1 class="title">
     	大连市三类人员建筑安全培训系统
@@ -63,143 +67,70 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div id="mytitle" style="padding: 5px; background: rgb(221, 221, 221);">欢迎系统管理员登录</div>
 		<div style="padding:20px;">
 			<div id="tag_cont0" class="content_right" style="height:600px; width:100%; border:none;">
-        		 首页内容
+        		<!-- <table id="dg" class="easyui-datagrid" style="width:100%;height:250px">
+		
+				</table> -->
         	</div>
         	<div id="tag_cont4" class="content_right" style="height:600px; width:100%; border:none;">   
         		网上报名    
         	</div>
             <div id="tag_cont1" class="content_right" style="height:600px; width:100%; border:none; display:none;">
             	<div>
-            		<div style="border: 1px solid #dadada;margin-bottom:5px;"> 
-		  				<div class="tiny ui button" style="background:white;border:1px solid #66B8D7;" onclick="search(1)">
-							<i class="search icon"></i>
-							查询
+					<table id="dg"style="width:998px;margin:auto;height:400px;"></table>
+				    	<div id="tb">
+								<a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="addCmp();">新增</a>
+								<a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">编辑</a>
+								<a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
+								<a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true">帮助</a>
 						</div>
-						<div class="tiny ui button" style="background:white;border:1px solid #66B8D7;" id="add_equipment" onclick="addEquipment()">
-	           				<i class="add icon"></i>
-	            			添加
-	        			</div>
-						<div class="tiny ui button" style="background:white;border:1px solid #66B8D7;" onclick="delEquipment()">
-							<i class="remove icon"></i>
-							删除
+				    	<div id="dlg" style="width:400px;height:280px;">
+						    <form>
+									<label>姓名</label><input type="hidden" name="threeMan.id" value="${loginUser.id }">
+									<input  type="text"  name="threeMan.name" class="easyui-validatebox" value="${loginUser.name }">
+								
+									<label>类型</label>
+									<input  type="text" name="threeMan.type" class="easyui-validatebox" value="${loginUser.type }"><br/>
+									
+									<label>所属公司</label>
+									<input  type="text" name="threeMan.companyid" class="easyui-validatebox" value="${loginUser.companyid }"/>
+									
+									<label>身份证</label>
+									
+									<label>性别</label>
+									<input  type="text" name="threeMan.sex" class="easyui-validatebox" value="${loginUser.sex }"><br/>
+									
+									<label>出生日期</label>
+									
+									<label>职务</label>
+									<input  type="text" name="threeMan.duty" class="easyui-validatebox" value="${loginUser.duty }">
+									
+									<label>职称</label>
+									<input  type="text" name="threeMan.title" class="easyui-validatebox" value="${loginUser.title }"><br/>
+									
+					 	 			
+									<label>学历</label>
+									<input  type="text" name="threeMan.degress" class="easyui-validatebox" value="${loginUser.degress }">
+									
+									<label>发证日期</label>
+									<input  type="text" name="threeMan.issus_date" class="easyui-validatebox" value="<fmt:formatDate value="${loginUser.issus_date }" pattern="yyyy-MM-dd" /> " ><br/>
+									
+									<label>有效期起</label>
+									<input  type="text" name="threeMan.start_date" class="easyui-validatebox" value="<fmt:formatDate value="${loginUser.start_date }" type="date"/>" >
+								
+									<label>有效期迄</label>
+									<input  type="text" name="threeMan.final_date" class="easyui-validatebox" value="<fmt:formatDate value="${loginUser.final_date }" type="date"/>" ><br/>
+									
+									<label>发证机关</label>
+									<input  type="text" name="threeMan.authority" class="easyui-validatebox" value="${loginUser.authority }" >
+									
+									<label>证件号码</label>
+									<input  type="text" name="threeMan.certificate" class="easyui-validatebox" value="${loginUser.certificate }" >	<br/>	
+		            		</form>					    
 						</div>
-	        			<div class="tiny ui button" style="background:white;border:1px solid #66B8D7;" onclick="exportExcl()">
-	            			<i class="table icon"></i>
-	            			导出excl                    
-	        			</div>
-        			</div>
-            		<table class="table ui">
-            			<thead>
-            				<tr>
-            					<td><input type="checkbox"></td>
-            					<td>姓名</td> <td>性别</td> <td>职务</td> <td>职称</td> <td>学位</td> <td>类型</td> <td>公司</td> <td>身份证</td> <td>发证日期</td> <td>有效期起</td> <td>有效期讫</td> <td>发证机关</td> <td>证书号</td>
-            				</tr>
-            			</thead>
-            			<tbody>
-            				<c:forEach items="${threeManList }" var="t">
-            					<tr>
-            						<td><input type="checkbox" name="threeManCheck" id="${t.id }"></td>
-            						<td>${t.name }</td>
-            						<td>${t.indefication }</td>
-            						<td>${t.sex }</td>
-            						<td>${t.duty }</td>
-            						<td>${t.title }</td>
-            						<td>${t.degress }</td>
-            						<td>${t.type }</td>
-            						<td>${t.companyid }</td>
-            						<td>${t.issus_date }</td>
-            						<td>${t.start_date }</td>
-            						<td>${t.final_date }</td>
-            						<td>${t.authority }</td>
-            						<td>${t.certificate }</td>
-            					</tr>
-            				</c:forEach>
-            			</tbody>
-            		</table>
+				    </div>
             	</div>
         		<div style="display:none;">
-        			<form action="editThreeMan.do" name="modifyForm" method="post">
-                		<div class="label_name" style="padding-top:10px;">
-			 	 			<div style=" float:left; padding-right:100px;">
-								<label>姓名</label>
-								<input  type="text" name="threeMan.name" value="${loginUser.name }">
-								<input type="hidden" name="threeMan.id" value="${loginUser.id }">
-							</div>
-							<div>
-								<label>类型</label>
-								<input  type="text" name="threeMan.type" value="${loginUser.type }">
-							</div>
-						</div>
-                		<div class="label_name">
-			 	 			<div style=" float:left; padding-right:100px;">
-								<label>所属公司</label>
-								<input  type="text" name="threeMan.companyid" value="${loginUser.companyid }">
-							</div>
-							<div>
-								<label>身份证</label>
-								<input  type="text" name="threeMan.indefication" value="${loginUser.indefication}">
-							</div>
-						</div>
-                		<div class="label_name">
-			 	 			<div style=" float:left; padding-right:100px;">
-								<label>性别</label>
-								<input  type="text" name="threeMan.sex" value="${loginUser.sex }">
-							</div>
-							<div>
-								<label>出生日期</label>
-								<input  type="text" name="threeMan.birthday" value="<fmt:formatDate value="${loginUser.birthday}" type="date" />" >
-							</div>
-						</div>
-                		<div class="label_name">
-			 	 			<div style=" float:left; padding-right:100px;">
-								<label>职务</label>
-								<input  type="text" name="threeMan.duty" value="${loginUser.duty }">
-							</div>
-							<div>
-								<label>职称</label>
-								<input  type="text" name="threeMan.title" value="${loginUser.title }">
-							</div>
-						</div>
-                		<div class="label_name">
-			 	 			<div style=" float:left; padding-right:100px;">
-								<label>学历</label>
-								<input  type="text" name="threeMan.degress" value="${loginUser.degress }">
-							</div>
-							<div>
-								<label>发证日期</label>
-								<input  type="text" name="threeMan.issus_date"  value="<fmt:formatDate value="${loginUser.issus_date }" pattern="yyyy-MM-dd" /> " >
-							</div>
-						</div>
-                		<div class="label_name">
-			 	 			<div style=" float:left; padding-right:100px;">
-								<label>有效期起</label>
-								<input  type="text" name="threeMan.start_date" value="<fmt:formatDate value="${loginUser.start_date }" type="date"/>" >
-							</div>
-							<div>
-								<label>有效期迄</label>
-								<input  type="text" name="threeMan.final_date" value="<fmt:formatDate value="${loginUser.final_date }" type="date"/>" >
-							</div>
-						</div>
-                		<div class="label_name">
-			 	 			<div style=" float:left; padding-right:100px;">
-								<label>发证机关</label>
-								<input  type="text" name="threeMan.authority" value="${loginUser.authority }" >
-							</div>
-							<div>
-								<label>证件号码</label>
-								<input  type="text" name="threeMan.certificate" value="${loginUser.certificate }" >
-							</div>
-						</div>
-						
-						<div id="modSubmit">
-							<i class="send icon"></i>
-							修改
-						</div>
-						<div id="cancel" onclick="mod()">
-							<i class="send icon"></i>
-							取消
-						</div>
-            		</form>	  
+        			  
             	</div>    	
         	</div>
             <div id="tag_cont2" class="content_right" style="height:600px; width:100%; border:none; display:none;">
@@ -247,6 +178,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				j.style.display="none";	
 			}
 			document.getElementById(show_cont).style.display="block";
+			loadTable();
 		}
 		$("#modSubmit").on("click",function(){
 	  			alert("dfdfd");
@@ -277,7 +209,75 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  	    var date = new Date();
 	  	    date.setTime(objDate);
 	  	    return date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
+	  	}  
+	  	function loadTable(){
+	  		$('#dg').datagrid({
+	  			title:'建筑企业',
+	  			toolbar: '#tb',
+	  			pageSize:2,
+	  			pageList:[2,4,6,8],
+	  			pagination:true,       
+		  		url:'getThreeManList.do',	  		
+		  		columns:[[ 
+					{field:'id',title:'id',width:80},
+		  			{field:'name',title:'姓名',width:80},
+		  			{field:'sex',title:'性别',width:60,align:'right'},
+		  			{field:'birthday',title:'出生日期',width:80,formatter:function(value,row,index){
+						if(value){
+							var unixTimestamp = new Date(value.time);
+							return unixTimestamp.toLocaleDateString();
+						}
+					}},
+		  			{field:'duty',title:'职务',width:80},
+		  			{field:'title',title:'职称',width:80},
+		  			{field:'degress',title:'学历',width:80},
+		  			{field:'indefication',title:'身份证',width:80},
+		  			{field:'type',title:'类型',width:80},
+		  			{field:'certificate',title:'证件号',width:80},
+		  			{field:'issus_date',title:'发证日期',width:80,formatter:function(value,row,index){
+						if(value){
+							var unixTimestamp = new Date(value.time);
+							return unixTimestamp.toLocaleDateString();
+						}
+					}},
+		  			{field:'start_date',title:'有效期起',width:80,formatter:function(value,row,index){
+						if(value){
+							var unixTimestamp = new Date(value.time);
+							return unixTimestamp.toLocaleDateString();
+						}
+					}},
+		  			{field:'final_date',title:'有效期讫',width:80,formatter:function(value,row,index){
+						if(value){
+							var unixTimestamp = new Date(value.time);
+							return unixTimestamp.toLocaleDateString();
+						}
+					}},
+		  			{field:'authority',title:'法证机关',width:80},
+		  			{field:'companyid',title:'所属公司',width:80},	
+		  			]] 
+		  		});
 	  	}
-
+	  	$('#dlg').hide();
+	  	function addCmp(){
+			$('#dlg').show();
+			$('#dlg').dialog({    
+	    		title: '新增建筑企业',    
+	    		width: 600,    
+	    		height: 500,  
+	    		left: 434,
+	    		top: 190,
+	    		closed: false,    
+	    		cache: false,        
+	    		modal: true,
+	    		onOpen:function(){
+	    			$('#econamicType').combobox({
+	    			url:'getEconemicType',
+	    			valueFied:'id',
+	    			textField:'value',
+	    			editable:false,
+	    			});
+	    		},
+			});  
+		}
 </script>
 </html>

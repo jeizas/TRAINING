@@ -57,9 +57,12 @@
 		<action name="test" class="com.jeizas.action.ThreeManAction" method="testInterceptor">
 			<result name="success">/WEB-INF/pages/test.jsp</result>
 		</action>
+		<action name="getThreeManList" method="getThreeManList" class="com.jeizas.action.AdminAction">
+		</action>
 	</package>
 	<!-- ajax -->
 	<package namespace="/ajax" extends="json-default" name="ajax">
 		<action name="*Ajax*" method="{2}" class="com.jeizas.action.{1}"></action>
+		
 	</package>
 </struts>    
