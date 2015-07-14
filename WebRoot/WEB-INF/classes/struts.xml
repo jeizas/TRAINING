@@ -59,10 +59,13 @@
 		</action>
 		<action name="getThreeManList" method="getThreeManList" class="com.jeizas.action.AdminAction">
 		</action>
+		
+		<action name="saveThreeMan" method="saveThreeMan" class="com.jeizas.action.AdminAction">
+		</action>
+		
 	</package>
 	<!-- ajax -->
 	<package namespace="/ajax" extends="json-default" name="ajax">
 		<action name="*Ajax*" method="{2}" class="com.jeizas.action.{1}"></action>
-		
 	</package>
 </struts>    

@@ -33,7 +33,7 @@ header .title{ padding-left:300px; height:166px; overflow:hidden; display:block;
 { display:none;}
 .on{ background-color:#66BBDA; color:#fff;}
 /*---------------------------footer---------------------------------------*/
-footer{height:200px; width:100%;}
+footer{height:100px; width:100%;}
 .footer_info_top{ height:100px;width:1349px; background:url(../images/bg.jpg)center top repeat-x;}
 .info_item_container{ width:720px height:100px; }
 .info_item{ width:200px; height:158px; float:left; padding-right:40px;}

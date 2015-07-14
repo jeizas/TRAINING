@@ -22,14 +22,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="js/easyui/jquery.easyui.min.js"></script>
 	
 <style type="text/css">
-	body{margin:0px;padding:0px;}
-	#dlg form input{
-		width
+body{margin:0px;padding:0px;}
+#dlg form input{
+	width:170px;
+	height:30px;
+	margin-top:10px;
+	/* float:right; */
 	}
+#dlg form label{line-height:44px;margin-left:15px;}
+#addThreemanright {margin-right:20px;}
+#eidtDlg form label{line-height:44px;margin-left:15px;}
+#editDlg form input{
+	width:170px;
+	height:30px;
+	margin-top:10px;
+	/* float:right; */
+	}
+#editThreeman input{margin-top:15px;}
 </style>
 </head>
   
-<body id="page_01">
+<body>
 <header>
 	<h1 class="title">
     	大连市三类人员建筑安全培训系统
@@ -67,9 +80,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div id="mytitle" style="padding: 5px; background: rgb(221, 221, 221);">欢迎系统管理员登录</div>
 		<div style="padding:20px;">
 			<div id="tag_cont0" class="content_right" style="height:600px; width:100%; border:none;">
-        		<!-- <table id="dg" class="easyui-datagrid" style="width:100%;height:250px">
-		
-				</table> -->
+        		首页内容
         	</div>
         	<div id="tag_cont4" class="content_right" style="height:600px; width:100%; border:none;">   
         		网上报名    
@@ -79,53 +90,105 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<table id="dg"style="width:998px;margin:auto;height:400px;"></table>
 				    	<div id="tb">
 								<a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="addCmp();">新增</a>
-								<a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">编辑</a>
-								<a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
+								<a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true" onclick="editThreeMan()">编辑</a>
+								<a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onclick="delThreeMan();">删除</a>
 								<a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true">帮助</a>
 						</div>
 				    	<div id="dlg" style="width:400px;height:280px;">
-						    <form>
-									<label>姓名</label><input type="hidden" name="threeMan.id" value="${loginUser.id }">
-									<input  type="text"  name="threeMan.name" class="easyui-validatebox" value="${loginUser.name }">
+						    <form id="addThreeman" method="post"> 
+						    	<div style="width:250px;float:left;">
+									<label>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</label><input type="hidden" name="threeMan.id" value="${loginUser.id }">
+									<input  type="text"  name="name" class="easyui-validatebox"  data-options="required:true"><br/>
 								
-									<label>类型</label>
-									<input  type="text" name="threeMan.type" class="easyui-validatebox" value="${loginUser.type }"><br/>
+									<label>类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型</label>
+									<input  type="text" name="type" class="easyui-validatebox"  data-options="required:true"><br/>
 									
-									<label>所属公司</label>
-									<input  type="text" name="threeMan.companyid" class="easyui-validatebox" value="${loginUser.companyid }"/>
+									<label>身&nbsp;&nbsp;份&nbsp;&nbsp;证</label>
+									<input  type="text" name="indefication" class="easyui-validatebox"  data-options="required:true"><br/>
 									
-									<label>身份证</label>
-									
-									<label>性别</label>
-									<input  type="text" name="threeMan.sex" class="easyui-validatebox" value="${loginUser.sex }"><br/>
+									<label>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别</label>
+									<input  type="text" name="threeMan.sex" class="easyui-validatebox" data-options="required:true"><br/>
 									
 									<label>出生日期</label>
+									<input  type="text" name="birthday" class="easyui-datebox"  data-options="validType:'md[\'10/11/2012\']'"><br/>
 									
-									<label>职务</label>
-									<input  type="text" name="threeMan.duty" class="easyui-validatebox" value="${loginUser.duty }">
+									<label>职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;务</label>
+									<input  type="text" name="duty" class="easyui-validatebox" ><br/>
 									
-									<label>职称</label>
-									<input  type="text" name="threeMan.title" class="easyui-validatebox" value="${loginUser.title }"><br/>
-									
-					 	 			
-									<label>学历</label>
-									<input  type="text" name="threeMan.degress" class="easyui-validatebox" value="${loginUser.degress }">
+									<label>职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称</label>
+									<input  type="text" name="title" class="easyui-validatebox" ><br/>
+								</div>
+								<div style="width:250px;float:right;"id="addThreemanright">				 	 			
+									<label>学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;历</label>
+									<input  type="text" name="degress" class="easyui-validatebox" ><br/>
 									
 									<label>发证日期</label>
-									<input  type="text" name="threeMan.issus_date" class="easyui-validatebox" value="<fmt:formatDate value="${loginUser.issus_date }" pattern="yyyy-MM-dd" /> " ><br/>
+									<input  type="text" name="issus_date" class="easyui-datebox" data-options="validType:'md[\'10/11/2012\']'" ><br/>
 									
 									<label>有效期起</label>
-									<input  type="text" name="threeMan.start_date" class="easyui-validatebox" value="<fmt:formatDate value="${loginUser.start_date }" type="date"/>" >
+									<input  type="text" name="start_date" class="easyui-datebox" data-options="validType:'md[\'10/11/2012\']'" ><br/>
 								
 									<label>有效期迄</label>
-									<input  type="text" name="threeMan.final_date" class="easyui-validatebox" value="<fmt:formatDate value="${loginUser.final_date }" type="date"/>" ><br/>
+									<input  type="text" name="final_date" class="easyui-datebox" data-options="validType:'md[\'10/11/2012\']'" ><br/>
 									
 									<label>发证机关</label>
-									<input  type="text" name="threeMan.authority" class="easyui-validatebox" value="${loginUser.authority }" >
+									<input  type="text" name="authority" class="easyui-validatebox"  ><br/>
 									
 									<label>证件号码</label>
-									<input  type="text" name="threeMan.certificate" class="easyui-validatebox" value="${loginUser.certificate }" >	<br/>	
-		            		</form>					    
+									<input  type="text" name="certificate" class="easyui-validatebox"  >	<br/>	
+									
+									<label>所属公司</label>
+									<input  type="text" name="companyid" class="easyui-validatebox" /><br/>
+		            			</div>
+		            		</form>	
+		            	</div>	
+		            	<div id="editDlg" style="width:400px;height:280px;">
+							    <form id="editThreeman" method="post"> 
+							    	<div style="width:250px;float:left;">
+										<label>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</label><input type="hidden" name="threeMan.id" value="${loginUser.id }">
+										<input  type="text" id="t_name"  name="t.name" class="easyui-validatebox"  data-options="required:true"><br/>
+									
+										<label>类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型</label>
+										<input  type="text" id="t_type" name="t.type" class="easyui-validatebox"  data-options="required:true"><br/>
+										
+										<label>身&nbsp;&nbsp;份&nbsp;&nbsp;证</label>
+										<input  type="text" id="t_inde" name="t.indefication" class="easyui-validatebox"  data-options="required:true"><br/>
+										
+										<label>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别</label>
+										<input  type="text" id="t_sex" name="t.sex" class="easyui-validatebox" data-options="required:true"><br/>
+										
+										<label>出生日期</label>
+										<input  type="text" id="t_bir" name="t.birthday" class="easyui-datebox"  data-options="validType:'md[\'10/11/2012\']'"><br/>
+										
+										<label>职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;务</label>
+										<input  type="text" id="t_duty" name="t.duty" class="easyui-validatebox" ><br/>
+										
+										<label>职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称</label>
+										<input  type="text" id="t_tit" name="t.title" class="easyui-validatebox" ><br/>
+									</div>
+									<div style="width:250px;float:right;"id="addThreemanright">				 	 			
+										<label>学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;历</label>
+										<input  type="text" id="t_deg" name="t.degress" class="easyui-validatebox" ><br/>
+										
+										<label>发证日期</label>
+										<input  type="text" id="t_iss" name="t.issus_date" class="easyui-datebox" data-options="validType:'md[\'10/11/2012\']'" ><br/>
+										
+										<label>有效期起</label>
+										<input  type="text" id="t_sta" name="t.start_date" class="easyui-datebox" data-options="validType:'md[\'10/11/2012\']'" ><br/>
+									
+										<label>有效期迄</label>
+										<input  type="text" id="t_fin" name="t.final_date" class="easyui-datebox" data-options="validType:'md[\'10/11/2012\']'" ><br/>
+										
+										<label>发证机关</label>
+										<input  type="text" id="t_aut" name="t.authority" class="easyui-validatebox"  ><br/>
+										
+										<label>证件号码</label>
+										<input  type="text" id="t_cer" name="t.certificate" class="easyui-validatebox"  >	<br/>	
+										
+										<label>所属公司</label>
+										<input  type="text" id="t_com" name="t.companyid" class="easyui-validatebox" /><br/>
+			            			</div>
+			            		</form>					    			    
 						</div>
 				    </div>
             	</div>
@@ -153,13 +216,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <!--=========================footer================================-->
 <footer>
-	<div class="footer_info_top">
-    	<div class="main">
-        	<div class="info_item_container">
-            </div>
-            
-        </div>
-    </div>
     <div class="footer_info_bot">
     	<p class="p2">大连市三类人员建筑安全培训系统！ <br></p>
     </div>
@@ -210,13 +266,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  	    date.setTime(objDate);
 	  	    return date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
 	  	}  
+	  	//三类人员表格
 	  	function loadTable(){
 	  		$('#dg').datagrid({
 	  			title:'建筑企业',
 	  			toolbar: '#tb',
-	  			pageSize:2,
+	  			pageSize:4,
 	  			pageList:[2,4,6,8],
-	  			pagination:true,       
+	  			pagination:true,  
+	  			selectOnCheck:false,
 		  		url:'getThreeManList.do',	  		
 		  		columns:[[ 
 					{field:'id',title:'id',width:80},
@@ -257,13 +315,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  			]] 
 		  		});
 	  	}
+	  	//新增人员
 	  	$('#dlg').hide();
+	  	$('#editDlg').hide();
 	  	function addCmp(){
 			$('#dlg').show();
 			$('#dlg').dialog({    
 	    		title: '新增建筑企业',    
 	    		width: 600,    
-	    		height: 500,  
+	    		height: 400,  
 	    		left: 434,
 	    		top: 190,
 	    		closed: false,    
@@ -277,7 +337,145 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    			editable:false,
 	    			});
 	    		},
+	    		buttons:[{
+					text:'保存',
+					handler:threeManSubmit},{
+					text:'关闭',
+					handler:function exit(){$("#dlg").dialog('close');}}]
 			});  
+			function threeManSubmit(){
+				$.messager.confirm('确认对话框', '您想要提交表单吗？', function(r){
+					if (r){
+						$('#addThreeman').form('submit', {
+					  		url: 'ajax/SaveActionAjaxsaveThreeMan.do',
+					  		onSubmit: function(){
+					  			var isValid = $(this).form('validate');
+					  			if (!isValid){
+					  				return false;	// 如果表单是无效的则隐藏进度条
+					  			}
+					  		},
+					  		success: function(data){
+					  			$.messager.show({
+					  				style:{	right:'',
+					  					top:document.body.scrollTop+document.documentElement.scrollTop,
+					  					bottom:''},
+					  				title:'提交成功',
+					  				msg:'消息将在5秒后关闭。',
+					  				timeout:5000,
+					  				showType:'slide'
+					  			}); // 如果提交成功则隐藏进度条
+					  			$("#dlg").dialog('close');
+					  			$("#dlg").datagrid('reload');
+					  		}
+					  	});
+					}
+				});
+			}
 		}
+	  	//deleteThreeman
+	  	function delThreeMan(){
+	  		var row = $("#dg").datagrid("getSelected");
+	  		console.log(row);
+	  		if(row){
+	  			$.messager.confirm('确认对话框', '您想要删除记录吗？', function(r){
+					if (r){
+						$.post('ajax/AdminActionAjaxdeleteRow.do',{id:row.id},function(result){
+							if(result.success){
+								$("#dg").datagrid('reload');
+							}else{
+								$.messager.show({title:'error',msg:result.errorMsg});
+							}
+						},'json');
+						
+					}else{
+						$.messager.show({
+			  				style:{	right:'',
+			  					top:document.body.scrollTop+document.documentElement.scrollTop,
+			  					bottom:''},
+			  				title:'你已经取消删除',
+			  				msg:'消息将在3秒后关闭。',
+			  				timeout:3000,
+			  				showType:'slide'
+			  			});
+					}
+				});
+	  		}
+	  	}
+	  	//edit ThreeMan
+	  	function editThreeMan(){
+	  		getThreeManValue();
+	  		$('#editDlg').show();
+			$('#editDlg').dialog({    
+	    		title: '修改建筑企业',    
+	    		width: 600,    
+	    		height: 400,  
+	    		left: 434,
+	    		top: 190,
+	    		closed: false,    
+	    		cache: false,        
+	    		modal: true,
+	    		onOpen:function(){
+	    			$('#econamicType').combobox({
+	    			url:'getEconemicType',
+	    			valueFied:'id',
+	    			textField:'value',
+	    			editable:false,
+	    			});
+	    		},
+	    		buttons:[{
+					text:'保存',
+					handler:editThreeManSubmit},{
+					text:'关闭',
+					handler:function exit(){
+						/* alert("取消添加"); */
+						$("#editDlg").dialog('close');
+					}}]
+			});  
+			function editThreeManSubmit(){
+				$.messager.confirm('确认对话框', '您想要提交表单吗？', function(r){
+					if (r){
+						$('#addThreeman').form('submit', {
+					  		url: 'ajax/SaveActionAjaxsaveThreeMan.do',
+					  		onSubmit: function(){
+					  			var isValid = $(this).form('validate');
+					  			if (!isValid){
+					  				return false;	// 如果表单是无效的则隐藏进度条
+					  			}
+					  		},
+					  		success: function(data){
+					  			$.messager.show({
+					  				style:{	right:'',
+					  					top:document.body.scrollTop+document.documentElement.scrollTop,
+					  					bottom:''},
+					  				title:'提交成功',
+					  				msg:'消息将在5秒后关闭。',
+					  				timeout:5000,
+					  				showType:'slide'
+					  			}); // 如果提交成功则隐藏进度条
+					  			$("#editDlg").dialog('close');
+					  			$("#editDlg").datagrid('reload');
+					  		}
+					  	});
+					}
+				});
+			}
+	  	}
+	  	function getThreeManValue(){
+	  		var row = $("#dg").datagrid("getSelected");
+	  		$("#t_name").val(row.name);
+	  		$("#t_type").val(row.type);
+	  		$("#t_inde").val(row.indefication);
+	  		$("#t_sex").val(row.sex);
+	  		$("#t_bir").val(row.birthday);
+	  		$("#t_duty").val(row.duty);
+	  		$("#t_tit").val(row.title);
+	  		$("#t_deg").val(row.degress);
+	  		$("#t_iss").val(row.issus_date);
+	  		$("#t_sta").val(row.start_date);
+	  		$("#t_fin").val(row.final_date);
+	  		$("#t_aut").val(row.authority);
+	  		$("#t_cer").val(row.certificate);
+	  		$("#t_com").val(row.companyid);
+	  	}
 </script>
 </html>

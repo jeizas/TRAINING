@@ -78,4 +78,5 @@ public class ThreeManAction extends ActionSupport{
 		System.out.println("调用测试拦截器的方法成功");
 		return SUCCESS;
 	}
+	
 }

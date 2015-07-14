@@ -14,7 +14,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link type="text/css" rel="stylesheet" href="css/reset.css" media="all">
 	<link type="text/css" rel="stylesheet" href="css/main.css" media="all">	
 	<script type="text/javascript" src="js/jquery.min.js"></script>
-	
+<style type="text/css">
+input{
+	border:none;
+	margin:0;
+	padding:0;
+	outline:0;
+}
+</style>
 	
 <style type="text/css">
 .login_tbody tr{
@@ -174,13 +181,6 @@ body{
 </section>
 <!--=========================footer================================-->
 <footer>
-	<div class="footer_info_top">
-    	<div class="main">
-        	<div class="info_item_container">
-            </div>
-            
-        </div>
-    </div>
     <div class="footer_info_bot">
     	<p class="p2">大连市三类人员建筑安全培训系统！ <br></p>
     </div>

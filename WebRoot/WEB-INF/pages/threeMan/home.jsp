@@ -185,13 +185,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <!--=========================footer================================-->
 <footer>
-	<div class="footer_info_top">
-    	<div class="main">
-        	<div class="info_item_container">
-            </div>
-            
-        </div>
-    </div>
     <div class="footer_info_bot">
     	<p class="p2">大连市三类人员建筑安全培训系统！ <br></p>
     </div>

@@ -11,4 +11,6 @@ public interface ThreeManService {
 	JSONObject getThreeManPageList(int index,int pagesize);
 	List<ThreeMan> getThreeManList();
 	void updateThreeMan(ThreeMan threeMan);
+	void deleteThreeMan(ThreeMan threeMan);
+	void saveThreeMan(ThreeMan threeMan);
 }

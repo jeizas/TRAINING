@@ -45,4 +45,16 @@ public class ThreeManServiceImpl implements ThreeManService {
 		return js;
 	}
 
+	@Override
+	public void deleteThreeMan(ThreeMan threeMan) {
+		// TODO Auto-generated method stub
+		threeManDao.delete(threeMan);
+	}
+
+	@Override
+	public void saveThreeMan(ThreeMan threeMan) {
+		// TODO Auto-generated method stub
+		threeManDao.save(threeMan);
+	}
+
 }

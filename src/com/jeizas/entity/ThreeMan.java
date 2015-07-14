@@ -1,5 +1,8 @@
 package com.jeizas.entity;
 
+import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -12,7 +15,12 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Table(name="threeman",catalog="buildingsafety")
 @Entity
-public class ThreeMan {
+public class ThreeMan implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private int id;
 	private String name;
 	private String certificate;//证书id
@@ -30,7 +38,7 @@ public class ThreeMan {
 	private String authority;//发证机关
 	
 	@Id
-	@GenericGenerator(name = "generator", strategy = "native")//增加时如果没有id则主键自增
+	@GenericGenerator(name = "generator", strategy="increment")//增加时如果没有id则主键自增
 	@GeneratedValue(generator = "generator")//和上面一行配合使用
 	@Column(name = "ID", unique = true, nullable = false)
 	public int getId() {
@@ -81,15 +89,18 @@ public class ThreeMan {
 	public void setSex(String sex) {
 		this.sex = sex;
 	}
-	/*@JSON(format="yyyy-MM-dd")*/
-	/*@Temporal(TemporalType.DATE)*/
 	@Column(name="BIRTHDAY")
 	public Date getBirthday() {
 		return birthday;
 	}
-	public void setBirthday(Date birthday) {
+	public void setBirthday(Date birthday){
 		this.birthday = birthday;
 	}
+	/*public void setBirthday(String birthday) throws ParseException {//reload set
+		System.out.println("dddddddddddd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		this.birthday = (Date) sdf.parse(birthday);
+	}*/
 	@Column(name="DUTY",length=20)
 	public String getDuty() {
 		return duty;
@@ -119,22 +130,34 @@ public class ThreeMan {
 	public void setIssus_date(Date issus_date) {
 		this.issus_date = issus_date;
 	}
+	/*public void setIssus_date(String issus_date) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		this.issus_date = (Date) sdf.parse(issus_date);
+	}*/
 	/*@Temporal(TemporalType.DATE)*/
 	@Column(name="START_DATE")
 	public Date getStart_date() {
 		return start_date;
 	}
-	public void setStart_date(Date start_date) {
+	public void setStart_date(Date start_date){
 		this.start_date = start_date;
 	}
+	/*public void setStart_date(String start_date) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		this.start_date = sdf.parse(start_date);
+	}*/
 	/*@Temporal(TemporalType.DATE)*/
 	@Column(name="FINAL_DATE")
 	public Date getFinal_date() {
 		return final_date;
 	}
-	public void setFinal_date(Date final_date) {
+	public void setFinal_date(Date final_date){
 		this.final_date = final_date;
 	}
+	/*public void setFinal_date(String final_date) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		this.final_date = sdf.parse(final_date);
+	}*/
 	@Column(name="AUTHORITY",length=200)
 	public String getAuthority() {
 		return authority;

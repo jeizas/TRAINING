@@ -18,7 +18,7 @@ object, ol, output,
 p, pre, progress,
 q, 
 s, samp, section, small, span, source, strike, strong, sub, sup,
-table, tbody, tfoot, thead, th, tr, tdvideo, tt,
+tdvideo, tt,
 u, ul, 
 var{
     background: transparent;
@@ -28,16 +28,9 @@ var{
 		padding: 0;
 		border: 0;
 		outline: 0;
-    vertical-align: top; }
-input{
-	border:none;
-	margin:0;
-	padding:0;
-	outline:0;
-	}
-#page_01 input{
-	border:1px solid #000;
+    vertical-align: top; 
 }
+
 ol, ul {
 	list-style: none;
 }
