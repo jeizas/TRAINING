@@ -22,7 +22,7 @@
     	<interceptors>
 			<interceptor name="LoginInterceptor" class="com.jeizas.Interceptor.LoginInterceptor"></interceptor>
 			<interceptor-stack name="mydefault">
-				<interceptor-ref name="defaultStack" />
+				<!-- <interceptor-ref name="defaultStack" /> -->
 				<interceptor-ref name="LoginInterceptor" />
 			</interceptor-stack>
 		</interceptors>

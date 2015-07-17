@@ -5,10 +5,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -24,7 +28,7 @@ public class ThreeMan implements Serializable{
 	private int id;
 	private String name;
 	private String certificate;//证书id
-	private String type;//类型
+	private DomainValue type;//类型
 	private String companyid;//公司id
 	private String indefication;//身份证
 	private String sex;//性别
@@ -61,11 +65,12 @@ public class ThreeMan implements Serializable{
 	public void setCertificate(String certificate) {
 		this.certificate = certificate;
 	}
-	@Column(name="TYPE",length=1)
-	public String getType() {
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.EAGER)//fetch = FetchType.LAZY使用此选项nested exception is org.hibernate.LazyInitializationException: could not initialize proxy - no Sessi
+	@JoinColumn(name="TYPE")
+	public DomainValue getType() {
 		return type;
 	}
-	public void setType(String type) {
+	public void setType(DomainValue type) {
 		this.type = type;
 	}
 	@Column(name="COMPANYID",length=36)

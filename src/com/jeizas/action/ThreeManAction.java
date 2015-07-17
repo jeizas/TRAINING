@@ -15,7 +15,9 @@ import net.sf.json.JSONObject;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.stereotype.Controller;
 
+import com.jeizas.entity.DomainValue;
 import com.jeizas.entity.ThreeMan;
+import com.jeizas.service.DomainValueService;
 import com.jeizas.service.ThreeManService;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -29,6 +31,8 @@ public class ThreeManAction extends ActionSupport{
 
 	@Resource
 	private ThreeManService threeManService;
+	@Resource
+	private DomainValueService domainValueService;
 	
 	private ThreeMan threeMan;
 	public ThreeMan getThreeMan() {
@@ -77,6 +81,9 @@ public class ThreeManAction extends ActionSupport{
 	public String testInterceptor(){
 		System.out.println("调用测试拦截器的方法成功");
 		return SUCCESS;
+	}
+	public void getEconemicType(){
+		List<DomainValue> list = domainValueService.getDomainValueList();
 	}
 	
 }

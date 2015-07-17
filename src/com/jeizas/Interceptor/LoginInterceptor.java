@@ -18,7 +18,7 @@ public class LoginInterceptor extends AbstractInterceptor {
 	public String intercept(ActionInvocation arg0) throws Exception {
 		// TODO Auto-generated method stub
 		Map<String,Object> session=ActionContext.getContext().getSession();
-		Object user=session.get("user");
+		Object user=session.get("loginUser");
 		if(user!=null){
 			return arg0.invoke();
 		}else{

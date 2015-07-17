@@ -101,7 +101,7 @@ body{margin:0px;padding:0px;}
 									<input  type="text"  name="name" class="easyui-validatebox"  data-options="required:true"><br/>
 								
 									<label>类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型</label>
-									<input  type="text" name="type" class="easyui-validatebox"  data-options="required:true"><br/>
+									<input  type="text" id="econamicType" name="type" class="easyui-validatebox"  data-options="required:true"><br/>
 									
 									<label>身&nbsp;&nbsp;份&nbsp;&nbsp;证</label>
 									<input  type="text" name="indefication" class="easyui-validatebox"  data-options="required:true"><br/>
@@ -331,7 +331,7 @@ body{margin:0px;padding:0px;}
 	    		modal: true,
 	    		onOpen:function(){
 	    			$('#econamicType').combobox({
-	    			url:'getEconemicType',
+	    			url:'ajax/ThreeManActionAjaxgetEconemicType.do',
 	    			valueFied:'id',
 	    			textField:'value',
 	    			editable:false,

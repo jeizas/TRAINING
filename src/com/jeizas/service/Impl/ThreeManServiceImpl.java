@@ -11,6 +11,7 @@ import org.springframework.scripting.config.LangNamespaceHandler;
 import org.springframework.stereotype.Service;
 
 import com.jeizas.dao.BaseDao;
+import com.jeizas.entity.DomainValue;
 import com.jeizas.entity.ThreeMan;
 import com.jeizas.service.ThreeManService;
 

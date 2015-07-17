@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.sf.json.JSONObject;
 
+import com.jeizas.entity.DomainValue;
 import com.jeizas.entity.ThreeMan;
 
 public interface ThreeManService {
