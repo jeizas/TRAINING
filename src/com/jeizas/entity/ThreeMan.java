@@ -65,7 +65,7 @@ public class ThreeMan implements Serializable{
 	public void setCertificate(String certificate) {
 		this.certificate = certificate;
 	}
-	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.EAGER)//fetch = FetchType.LAZY使用此选项nested exception is org.hibernate.LazyInitializationException: could not initialize proxy - no Sessi
+	@ManyToOne
 	@JoinColumn(name="TYPE")
 	public DomainValue getType() {
 		return type;

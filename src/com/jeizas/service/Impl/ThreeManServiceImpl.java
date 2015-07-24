@@ -40,6 +40,9 @@ public class ThreeManServiceImpl implements ThreeManService {
 		Long count = threeManDao.count("select count(*) from ThreeMan t order by t.id ");
 		List<Object> param = new ArrayList<>();
 		List<ThreeMan> list = threeManDao.find(hql, param, page, rows);
+		for(ThreeMan t:list){
+			System.out.println(t);
+		}
 		JSONObject js = new JSONObject();
 		js.put("total",count.intValue());
 		js.put("rows", list);

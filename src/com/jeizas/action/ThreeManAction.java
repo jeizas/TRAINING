@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import org.apache.catalina.connector.Request;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.stereotype.Controller;
 
@@ -82,8 +84,18 @@ public class ThreeManAction extends ActionSupport{
 		System.out.println("调用测试拦截器的方法成功");
 		return SUCCESS;
 	}
-	public void getEconemicType(){
+	public void getEconemicType() throws IOException{
+		HttpServletResponse response = ServletActionContext.getResponse();
+		PrintWriter out = response.getWriter();
 		List<DomainValue> list = domainValueService.getDomainValueList();
+		for(DomainValue d:list){
+			System.out.println(d);
+		}
+		JSONArray json = JSONArray.fromObject(list);
+		response.setCharacterEncoding("UTF-8");
+		out.print(json);
+		out.flush();
+		out.close();
 	}
 	
 }

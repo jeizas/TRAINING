@@ -271,6 +271,12 @@ body{margin:0px;padding:0px;}
 	  		$('#dg').datagrid({
 	  			title:'建筑企业',
 	  			toolbar: '#tb',
+	  			remoteSort:false,
+	  			singleSelect:true,//是否允许多选
+	  			nowrap:true,//是否允许换行
+	  			rownumbers : true,//行标
+	  			fitColumns : true,
+	  			striped : true,
 	  			pageSize:4,
 	  			pageList:[2,4,6,8],
 	  			pagination:true,  
@@ -285,12 +291,16 @@ body{margin:0px;padding:0px;}
 							var unixTimestamp = new Date(value.time);
 							return unixTimestamp.toLocaleDateString();
 						}
-					}},
+					}},				
 		  			{field:'duty',title:'职务',width:80},
 		  			{field:'title',title:'职称',width:80},
 		  			{field:'degress',title:'学历',width:80},
 		  			{field:'indefication',title:'身份证',width:80},
-		  			{field:'type',title:'类型',width:80},
+		  			{field:'type',title:'类型',width:80,
+		  				formatter : function(value, row, index) {
+						if (value)
+							return value.value;
+					}},
 		  			{field:'certificate',title:'证件号',width:80},
 		  			{field:'issus_date',title:'发证日期',width:80,formatter:function(value,row,index){
 						if(value){
@@ -416,7 +426,7 @@ body{margin:0px;padding:0px;}
 	    		modal: true,
 	    		onOpen:function(){
 	    			$('#econamicType').combobox({
-	    			url:'getEconemicType',
+	    			url:'ajax/ThreeManActionAjaxgetEconemicType.do',
 	    			valueFied:'id',
 	    			textField:'value',
 	    			editable:false,

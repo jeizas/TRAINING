@@ -19,7 +19,7 @@ public class DomainValueServiceImpl implements DomainValueService {
 	@Override
 	public List<DomainValue> getDomainValueList() {
 		// TODO Auto-generated method stub
-		return domainDao.find(" from ThreeMan t order by t.id ");
+		return domainDao.find(" from DomainValue ");
 	}
 
 }

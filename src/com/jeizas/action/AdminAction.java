@@ -55,6 +55,7 @@ public class AdminAction extends ActionSupport{
 		HttpServletResponse response = ServletActionContext.getResponse();
 		JSONObject jo = threeManService.getThreeManPageList(page,rows);//加载管理三类人员页面信息
 		System.out.println(jo);
+		System.out.println("------------jo----------");
 		PrintWriter out = response.getWriter();
 		out.print(jo);
 		out.flush();
